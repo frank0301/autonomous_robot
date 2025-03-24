@@ -1,0 +1,21 @@
+ekf_filter_node:
+  frequency: 30
+  sensor_timeout: 0.2
+  two_d_mode: true
+  transform_time_offset: 0.0
+  transform_timeout: 0.1
+  map_frame: map
+  odom_frame: odom
+  base_link_frame: base_footprint
+  world_frame: odom
+
+  # IMU data
+  imu0: /imu
+  imu0_config: [false, false, false,    # X, Y, Z positions (not used)
+              false, false, true,     # Use only yaw (ignore roll and pitch)
+              false, false, false,    # Ignore linear velocities
+              false, false, true]     # Use only yaw angular velocity (ignore others)
+
+  imu0_differential: false
+  imu0_queue_size: 10
+  imu0_remove_gravitational_acceleration: true
