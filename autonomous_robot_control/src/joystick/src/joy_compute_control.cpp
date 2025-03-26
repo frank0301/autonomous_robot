@@ -6,9 +6,9 @@ SerialCom PrototypeControl::compute_control(double throttle, double steering, bo
     SerialCom ser_com;  // Serial communication structure for sending PWM and direction
 
     int pwm_L;              // PWM output for the left wheel
-    bool is_reverse_dir_L;  // Left wheel direction: false (forward), true (reverse)
+    bool dir_L;  // Left wheel direction: false (forward), true (reverse)
     int pwm_R;              // PWM output for the right wheel
-    bool is_reverse_dir_R;  // Right wheel direction: false (forward), true (reverse)
+    bool dir_R;  // Right wheel direction: false (forward), true (reverse)
     double omega_L;         // Angular velocity for the left wheel
     double omega_R;         // Angular velocity for the right wheel
         
@@ -142,14 +142,14 @@ SerialCom PrototypeControl::compute_control(double throttle, double steering, bo
     }
 
     // Determine wheel directions
-    is_reverse_dir_L = (omega_L < 0);  // True if left wheel is moving backward
-    is_reverse_dir_R = (omega_R < 0);  // True if right wheel is moving backward
+    dir_L = (omega_L < 0);  // True if left wheel is moving backward
+    dir_R = (omega_R < 0);  // True if right wheel is moving backward
 
     // Set PWM and direction values in serial communication structure
     ser_com.pwm_L = pwm_L * 100 / 255;  // Normalize PWM value for left wheel (0-100%)
     ser_com.pwm_R = pwm_R * 100 / 255;  // Normalize PWM value for right wheel (0-100%)
-    ser_com.is_reverse_dir_L = is_reverse_dir_L;  // Left wheel direction
-    ser_com.is_reverse_dir_R = is_reverse_dir_R;  // Right wheel direction
+    ser_com.dir_L = dir_L;  // Left wheel direction
+    ser_com.dir_R = dir_R;  // Right wheel direction
     ser_com.gear = is_low_gear;  // Current gear state
 
     return ser_com;

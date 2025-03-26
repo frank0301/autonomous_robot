@@ -35,8 +35,8 @@ class CmdVelToPwmNode(Node):
         control_msg.pwm_l = abs(pwm_left)
         control_msg.pwm_r = abs(pwm_right)
 
-        control_msg.is_reverse_dir_l = bool(pwm_left < 0)
-        control_msg.is_reverse_dir_r = bool(pwm_right < 0)
+        control_msg.dir_l = bool(pwm_left < 0)
+        control_msg.dir_r = bool(pwm_right < 0)
 
         control_msg.gear = bool(0)  # Static to low gear
 

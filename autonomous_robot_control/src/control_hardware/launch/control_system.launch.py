@@ -45,49 +45,69 @@ def generate_launch_description():
     parameters=[{"use_sim_time":False}]
     )
 
-    # Twist Mux Node
-    twist_mux = Node(
-        package="twist_mux",
-        executable="twist_mux",
-        parameters=[twist_mux_params, {"use_sim_time": False}],
-        remappings=[("/cmd_vel_out", "/cmd_vel_muxed")],
-    )
+    # # Twist Mux Node
+    # twist_mux = Node(
+    #     package="twist_mux",
+    #     executable="twist_mux",
+    #     parameters=[twist_mux_params, {"use_sim_time": False}],
+    #     remappings=[("/cmd_vel_out", "/cmd_vel_muxed")],
+    # )
+
+
+    # # Teleop Joy Node
+    # teleop_joy_node = Node(
+    #     package="joystick",  
+    #     executable="teleop_joy_node", 
+    #     name="teleop_joy_node",
+    #     output="screen",
+    #     parameters=[{"use_sim_time": False}]
+    # )
+
+    # # CmdVel to PWM Node
+    # cmd_vel_to_pwm_node = Node(
+    #     package="control_hardware",
+    #     executable="cmd2pwm",
+    #     name="cmd_vel_to_pwm_node",
+    #     output="screen",
+    #     parameters=[{"use_sim_time": False, "wheel_base": 0.5}]
+    # )
+
+    # # PWM to GPIO Node
+    # pwm_to_gpio_node = Node(
+    #     package="control_hardware",
+    #     executable="pwm2GPIO",
+    #     name="pwm_to_gpio_node",
+    #     output="screen",
+    #     parameters=[{"use_sim_time": False}]
+    # )
 
 
     # Teleop Joy Node
     teleop_joy_node = Node(
-        package="joystick",  
-        executable="teleop_joy_node", 
-        name="teleop_joy_node",
+        package="control_hardware",  # Replace with your package name
+        executable="joy_control_node",  # Replace with your executable name
+        name="joy_control_node",
         output="screen",
         parameters=[{"use_sim_time": False}]
     )
 
     # CmdVel to PWM Node
-    cmd_vel_to_pwm_node = Node(
+    cmd_vel_to_gpio_node = Node(
         package="control_hardware",
-        executable="cmd2pwm",
-        name="cmd_vel_to_pwm_node",
-        output="screen",
-        parameters=[{"use_sim_time": False, "wheel_base": 0.5}]
-    )
-
-    # PWM to GPIO Node
-    pwm_to_gpio_node = Node(
-        package="control_hardware",
-        executable="pwm2GPIO",
-        name="pwm_to_gpio_node",
+        executable="cmd2gpio",
+        name="cmd2gpio_node",
         output="screen",
         parameters=[{"use_sim_time": False}]
     )
-
     # Return the LaunchDescription with all nodes and arguments
     return LaunchDescription([
         declare_urdf_path,
         robot_state_publisher,
         joint_state_publisher,
-        twist_mux,
         teleop_joy_node,
-        cmd_vel_to_pwm_node,
-        pwm_to_gpio_node
+        cmd_vel_to_gpio_node,
+        # twist_mux,
+        # teleop_joy_node,
+        # cmd_vel_to_pwm_node,
+        # pwm_to_gpio_node
     ])

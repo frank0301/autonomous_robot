@@ -57,8 +57,8 @@ private:
         auto pwm_struct = robot_common_interfaces::msg::SerComStruct();
         pwm_struct.pwm_l = ser_com.pwm_L * 0.594177; // Scale left motor PWM
         pwm_struct.pwm_r = ser_com.pwm_R * 0.594177; // Scale right motor PWM
-        pwm_struct.is_reverse_dir_l = ser_com.is_reverse_dir_L; // Set reverse direction for left motor
-        pwm_struct.is_reverse_dir_r = ser_com.is_reverse_dir_R; // Set reverse direction for right motor
+        pwm_struct.dir_l = ser_com.dir_L; // Set reverse direction for left motor
+        pwm_struct.dir_r = ser_com.dir_R; // Set reverse direction for right motor
         pwm_struct.gear = ser_com.gear; // Set gear status
         publisher_->publish(pwm_struct); // Publish motor command message
 

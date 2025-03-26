@@ -6,9 +6,9 @@
 class SerialCom {
 public:
     int pwm_L;
-    bool is_reverse_dir_L; // if true - going reverse
+    bool dir_L; // if true - going reverse
     int pwm_R;
-    bool is_reverse_dir_R;
+    bool dir_R;
     bool gear; // if true - high gear
 };
 
